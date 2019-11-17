@@ -14,7 +14,7 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
                 this.TSpeechRecognition = new this.extendedWindow.webkitSpeechRecognition();
                 this.isSpeechRecognitionSupported = true;
                 console.log("ChromeSpeechRecognition initialited");
-            } 
+            }
         } catch (err) {
             console.error(err);
         }
@@ -22,5 +22,31 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
 
     IsSpeechRecognitionSupported(): boolean {
         return this.isSpeechRecognitionSupported;
+    }
+
+    async RecognizeCompleteUttenrance(): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+
+            if(!this.TSpeechRecognition){
+                reject("empty webkitSpeechRecognition");
+                return;
+            }
+
+            this.TSpeechRecognition.continuous = false;
+            this.TSpeechRecognition.interimResults = false;
+
+            this.TSpeechRecognition.onresult = function (event: any) {
+                var interim_transcript = '';
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        var result = event.results[i][0].transcript;
+                        this.TSpeechRecognition.stop();
+                        resolve(interim_transcript);
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+            };
+        });
     }
 }

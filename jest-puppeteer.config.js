@@ -1,8 +1,7 @@
 module.exports = {
 	launch: {
-        //executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
 		dumpio: true,
-		headless: false, // Speech synth API doesn't work in headless.
+		headless: false, // Speech API seems to work also in Headless browser
         args: [
             '--disable-infobars', 
             '--no-sandbox',
