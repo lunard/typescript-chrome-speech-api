@@ -13,6 +13,7 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
                 this.extendedWindow = <IWindow><unknown>window;
                 this.TSpeechRecognition = new this.extendedWindow.webkitSpeechRecognition();
                 this.isSpeechRecognitionSupported = true;
+                console.log("ChromeSpeechRecognition initialited");
             } 
         } catch (err) {
             console.error(err);
