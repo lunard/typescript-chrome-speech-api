@@ -25,6 +25,7 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
     }
 
     async RecognizeCompleteUttenrance(): Promise<string> {
+        
         return new Promise<string>((resolve, reject) => {
 
             if(!this.TSpeechRecognition){
@@ -35,18 +36,21 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
             this.TSpeechRecognition.continuous = false;
             this.TSpeechRecognition.interimResults = false;
 
+            let speechRecognition = this.TSpeechRecognition;
             this.TSpeechRecognition.onresult = function (event: any) {
                 var interim_transcript = '';
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+                    interim_transcript += event.results[i][0].transcript;
+
                     if (event.results[i].isFinal) {
-                        var result = event.results[i][0].transcript;
-                        this.TSpeechRecognition.stop();
+                        speechRecognition.stop();
                         resolve(interim_transcript);
-                    } else {
-                        interim_transcript += event.results[i][0].transcript;
                     }
                 }
             };
+
+            this.TSpeechRecognition.start();
         });
     }
 }
