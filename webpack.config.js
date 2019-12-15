@@ -11,7 +11,7 @@ var appBundle = Object.assign({}, config,{
     mode:'development',
     entry: './src/index',
     output: {
-        path: path.resolve(__dirname, 'lib'),
+        path: path.resolve(__dirname, 'tests'),
         filename: 'app.bundle.js'
     },
     resolve: {

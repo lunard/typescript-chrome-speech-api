@@ -1,25 +1,31 @@
 {
   "name": "typescript-chrome-speech-api",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "This project aims to create a Typescript wrapper for the W3C Speech API implemented by Google Chrome",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "bundle": "npm run lint && npm run format && webpack",
+    "bundle": "webpack",
+    "test": "npm run bundle && jest --config jest.config.js",
+    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lunard/typescript-chrome-speech-api.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["HTML Speech API"],
+  "author": "Luca Nardelli",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lunard/typescript-chrome-speech-api/issues"
   },
