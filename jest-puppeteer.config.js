@@ -1,7 +1,7 @@
 module.exports = {
 	launch: {
 		dumpio: true,
-		headless: false, // Speech API seems to work also in Headless browser
+		headless: true, // Speech API seems to work also in Headless browser
         args: [
             '--disable-infobars', 
             '--no-sandbox',
