@@ -7,7 +7,7 @@ describe('IChromeSpeechRecognition functions', () => {
 
   beforeAll(async () => {
     await page.goto('data:text/html,'+testHTMLPage);
-    await page.addScriptTag({path: `${__dirname}/../dist/app.bundle.js`}).catch((err)=>console.error(err));
+    await page.addScriptTag({path: `${__dirname}/../lib/app.bundle.js`}).catch((err)=>console.error(err));
   })
 
   it('IsSpeechRecognitionSupported', async () => {

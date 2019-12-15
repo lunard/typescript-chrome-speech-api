@@ -1,7 +1,7 @@
 module.exports = {
     preset: 'jest-puppeteer',
 	testMatch: ["**/?(*.)+(spec|test).[t]s"],
-	testPathIgnorePatterns: ['/node_modules/', 'dist'], // 
+	testPathIgnorePatterns: ['/node_modules/', 'lib'], // 
 	setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
 	transform: {
 		"^.+\\.ts?$": "ts-jest"
