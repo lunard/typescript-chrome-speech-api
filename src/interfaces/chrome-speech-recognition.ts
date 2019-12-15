@@ -1,4 +1,4 @@
 export interface IChromeSpeechRecognition {
-    IsSpeechRecognitionSupported(): boolean;
-    RecognizeCompleteUttenrance(): Promise<string>;
+  IsSpeechRecognitionSupported(): boolean;
+  RecognizeCompleteUttenrance(): Promise<string>;
 }

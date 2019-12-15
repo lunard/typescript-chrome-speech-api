@@ -1,6 +1,6 @@
-import { ChromeSpeechRecognition, RecognizerGenerator as RecognizerGenerator } from "./impl/chrome-speech-recognition";
+import { ChromeSpeechRecognition, RecognizerGenerator } from './impl/chrome-speech-recognition';
 
-if (typeof window !== 'undefined'){
-    (<any>window).ChromeSpeechRecognition = new ChromeSpeechRecognition();
-    (<any>window).RecognizerGenerator = RecognizerGenerator; 
+if (typeof window !== 'undefined') {
+  (window as any).ChromeSpeechRecognition = new ChromeSpeechRecognition();
+  (window as any).RecognizerGenerator = RecognizerGenerator;
 }
