@@ -65,13 +65,13 @@ export async function* RecognizerGenerator(speechRecognitionEngine: any) {
 
     let result: [string, boolean] = ['', false];
     while (!result[1]) {
-        let recognizeResult$ = await new Promise<[string, boolean]>((resolve, reject) => {
+        const recognizeResult$ = await new Promise<[string, boolean]>((resolve, reject) => {
             speechRecognitionEngine.onresult = (event: any) => {
                 try {
                     let partialResult = '';
                     let speechRecognitionEnded = false;
                     for (let i = event.resultIndex; i < event.results.length; ++i) {
-                        if (event.results[i][0].transcript && event.results[i][0].transcript != "") {
+                        if (event.results[i][0].transcript && event.results[i][0].transcript !== "") {
                             partialResult += event.results[i][0].transcript;
 
                             if (event.results[i].isFinal) {
@@ -92,14 +92,13 @@ export async function* RecognizerGenerator(speechRecognitionEngine: any) {
         try {
             result = await recognizeResult$;
 
-            if (lastPartialRecognizedText !== undefined && lastPartialRecognizedText != result[0]) {
+            if (lastPartialRecognizedText !== undefined && lastPartialRecognizedText !== result[0]) {
                 lastPartialRecognizedText = result[0];
 
                 yield lastPartialRecognizedText;
             }
         }
         catch (err) {
-            console.error("Recognition error:", err);
             yield lastPartialRecognizedText;
         }
     }

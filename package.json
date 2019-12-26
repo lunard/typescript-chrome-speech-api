@@ -1,6 +1,6 @@
 {
   "name": "typescript-chrome-speech-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This project aims to create a Typescript wrapper for the W3C Speech API implemented by Google Chrome",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
