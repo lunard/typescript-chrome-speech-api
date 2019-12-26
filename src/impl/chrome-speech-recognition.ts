@@ -46,15 +46,22 @@ export class ChromeSpeechRecognition implements IChromeSpeechRecognition {
                 }
             };
 
+            // Abort if already started
+            this.TSpeechRecognitionEngine.abort();
+
             this.TSpeechRecognitionEngine.start();
         });
     }
 }
 
 export async function* RecognizerGenerator(speechRecognitionEngine: any) {
+
     if (!speechRecognitionEngine) {
         return null;
     }
+
+    // Abort if already started
+    speechRecognitionEngine.abort();
 
     speechRecognitionEngine.continuous = false;
     speechRecognitionEngine.interimResults = true;
