@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./app.bundle.js"></script>
+    <script>
+        async function startRecognizer() {
+            for await (const textpart of window.RecognizerGenerator(window.ChromeSpeechRecognition.TSpeechRecognitionEngine)) {
+                console.log(`Partial text:'${textpart}'`);
+            };
+            console.warn("Utterance complete!");
+        }
+    </script>
+</head>
+
+<body>
+    <p>Test partial speech results (please use the Chrome Inspector)</p>
+    <button onclick="startRecognizer()">Recognize</button>
+</body>
+
+</html>
