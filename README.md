@@ -1,14 +1,36 @@
 # Description
 This project aims to create a Typescript wrapper for the W3C Speech API implemented by Google Chrome
 
-# Introduction
-Example of incremental recognition usage
+# Usage
+The NPM package is made to be used in your personal TypeScript application.
+
+You can for example create a new TypeScript application and define a class like this:
 
 ```
-for await (const textpart of window.RecognizerGenerator(window.ChromeSpeechRecognition.TSpeechRecognitionEngine)) {
-    console.log(`Partial text:'${textpart}'`);
-};
-console.warn("Utterance complete!");
+import { ChromeSpeechRecognition, RecognizerGenerator } from "typescript-chrome-speech-api";
+
+export class SpeechRecognizer {
+
+    private chromeSpeechRecognition: ChromeSpeechRecognition;
+
+    constructor() {
+        this.chromeSpeechRecognition = new ChromeSpeechRecognition();
+    }
+
+    public async startRecognizer(partialResultCallback: any) {
+        for await (const textPart of RecognizerGenerator(this.chromeSpeechRecognition.TSpeechRecognitionEngine)) {
+            partialResultCallback(textPart);
+        };
+        partialResultCallback(null);
+    }
+}
+```
+
+After you created a bundle via Webpack (for example using library='myLibrary', libraryTarget='var') you can start a recognition session 
+by using the startRecognizer function:
+
+```
+myLibrary.speechRecognizer.startRecognizer((txt)=>console.log(txt))
 ```
 
 # About the tests
