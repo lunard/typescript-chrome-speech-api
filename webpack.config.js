@@ -11,6 +11,8 @@ var appBundle = Object.assign({}, config,{
     mode:'development',
     entry: './src/index',
     output: {
+        library: 'chromeSpeechRecognitionLibrary',
+        libraryTarget:'var',
         path: path.resolve(__dirname, 'tests'),
         filename: 'app.bundle.js'
     },
